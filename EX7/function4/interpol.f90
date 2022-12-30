@@ -1,11 +1,18 @@
 program interpolation
     implicit none
     real, allocatable :: x(:), y(:)
+    character(20):: filename
     real :: x_val, x_1, x_2, y_interpol, m
     integer :: i,io, nlines
 
+    !let user select value to be interpolated
+    print*, 'Please enter the name of your file.'
+    read(*,*) filename
+    print*, filename
+    
+
     !First count number of lines
-    open (2, file = 'data.dat', status = 'old')
+    open (2, file = filename, status = 'old')
     nlines=0
     i=0
     do
@@ -14,9 +21,9 @@ program interpolation
         if (io/=0) exit
         nlines = nlines + 1    
     end do
-   
+
     !allocate array with size of lines in file and read in array
-    open (3, file = 'data.dat', status = 'old')
+    open (3, file = filename, status = 'old')
     allocate(x(nlines))
     allocate(y(nlines))
     do i = 1, nlines
@@ -32,12 +39,12 @@ program interpolation
     if ( x_val <= x(1) ) then
         m = (y(2)-y(1))/(x(2)-x(1))
         y_interpol= m*(x_val-x(1))+y(1)
-        print*, 'WARNING! Your x is lower then all available datapoints. Linear extrapolation of last two datapoints is used.' 
+        print*, 'WARNING! Your x is lower then all available datapoints. Linear extrapolation of lowest two datapoints is used.' 
         print*, 'Extrapolated value is', y_interpol 
     else if ( x_val > x(nlines) ) then
         m = (y(nlines)-y(nlines+1))/(x(nlines)-x(nlines+1))
         y_interpol= m*(x_val-x(nlines))+y(nlines)
-        print*, 'WARNING! Your x is higher then all available datapoints. Linear extrapolation of first two data points is used.'
+        print*, 'WARNING! Your x is higher then all available datapoints. Linear extrapolation of largest two data points is used.'
         print*, 'Extrapolated value is', y_interpol 
     else
 
