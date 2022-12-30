@@ -5,7 +5,7 @@ program interpolation
     real :: x_val, x_1, x_2, y_interpol, m
     integer :: i,io, nlines
 
-    !let user select value to be interpolated
+    !let user enter file name
     print*, 'Please enter the name of your file.'
     read(*,*) filename
     print*, filename
