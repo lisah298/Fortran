@@ -18,7 +18,7 @@ program interpolation
         print*, 'Hooray, we can save computation time! Please enter the number of lines.'
         read(*,*) nlines
     else if (lines_known == 'n') then
-        !First count number of lines
+        !Count number of lines
         open (2, file = filename, status = 'old')
         nlines=0
         i=0
@@ -28,9 +28,7 @@ program interpolation
             if (io/=0) exit
             nlines = nlines + 1    
         end do
-  
     end if
-
 
     !allocate array with size of lines in file and read in array
     open (3, file = filename, status = 'old')
@@ -63,8 +61,7 @@ program interpolation
             if ( x_1 < x_val .and. x_2>=x_val ) then
                 m = (y(i+1)-y(i))/(x_2-x_1)
                 y_interpol= m*(x_val-x_1)+y(i)
-                print*, 'Interpolated value is', y_interpol 
-                
+                print*, 'Interpolated value is', y_interpol  
                 exit          
             end if
             !This case should not occur because of l.34-44. However it remains as error handler
