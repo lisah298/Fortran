@@ -63,12 +63,7 @@ program interpolation
                 y_interpol= m*(x_val-x_1)+y(i)
                 print*, 'Interpolated value is', y_interpol  
                 exit          
-            end if
-            !This case should not occur because of l.34-44. However it remains as error handler
-            if ( i == nlines-1 ) then
-                print*, 'Your x is not in interval of computed data. Program will be terminated' 
-                call exit          
-            end if    
+            end if  
         end do 
     end if
     deallocate (x)
