@@ -9,7 +9,7 @@ program interpolation
     !let user enter file name
     print*, 'Please enter the name of your file.'
     read(*,*) filename
-    print*, filename
+    
 
     !ask user about size of file
     print*, 'Do you know how much lines your file contains? Enter y for yes and n for no.'
@@ -50,7 +50,8 @@ program interpolation
         print*, 'WARNING! Your x is lower then all available datapoints. Linear extrapolation of lowest two datapoints is used.' 
         print*, 'Extrapolated value is', y_interpol 
     else if ( x_val > x(nlines) ) then
-        m = (y(nlines)-y(nlines+1))/(x(nlines)-x(nlines+1))
+        print*,y(nlines)
+        m = (y(nlines)-y(nlines-1))/(x(nlines)-x(nlines-1))
         y_interpol= m*(x_val-x(nlines))+y(nlines)
         print*, 'WARNING! Your x is higher then all available datapoints. Linear extrapolation of largest two data points is used.'
         print*, 'Extrapolated value is', y_interpol 
