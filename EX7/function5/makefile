@@ -2,7 +2,7 @@
 FC=gfortran
 COMPILE.f90 = $(FC) -c
 
-SOURCES=main.f90 construct.f90 matmul.f90
+SOURCES=main.f90 construct.f90 ownmatmul.f90
 
 main: $(subst .f90,.o,$(SOURCES))
 	$(FC) -o $@ $+
@@ -10,10 +10,10 @@ main: $(subst .f90,.o,$(SOURCES))
 construct.o construct.mod: construct.f90
 	$(COMPILE.f90) -o construct.o $<
 
-matmul.o matmul.mod: matmul.f90
-	$(COMPILE.f90) -o matmul.o $<
+ownmatmul.o ownmatmul.mod: ownmatmul.f90
+	$(COMPILE.f90) -o ownmatmul.o $<
 
-main.o: main.f90 construct.mod matmul.mod
+main.o: main.f90 construct.mod ownmatmul.mod
 	$(COMPILE.f90) -o main.o $<
 
 

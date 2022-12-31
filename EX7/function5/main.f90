@@ -1,6 +1,6 @@
 program matrixmultiplication
     use construct
-    use MatMul
+    use ownmatmul
     implicit none
     integer :: dim, method
     real, dimension(:, :), allocatable :: A, B, C
@@ -29,12 +29,12 @@ program matrixmultiplication
     select case (method)
         case (0)
             print*, 'Dummy, no multiplication'
-            print '("Time = ",f6.3," seconds.")',finish_fill-start_fill
+            print '("Time for filling the matrices = ",f6.3," seconds.")',finish_fill-start_fill
         case (1)
             call cpu_time(start)
             print*, 'BLAS'
             call cpu_time(finish)
-            print '("Time = ",f6.3," seconds.")',finish-start
+            print '("Time for matrix multiplication = ",f6.3," seconds.")',finish-start
         case (2)
             print*, 'own Method selected'
             call cpu_time(start)
@@ -42,12 +42,13 @@ program matrixmultiplication
             call cpu_time(finish)
             print*, C(1,1)
             print*, C(2,2)
-            print '("Time = ",f6.3," seconds.")',finish-start
+            print '("Time for matrix multiplication = ",f6.3," seconds.")',finish-start
         case (3)
             print*, 'Oh Fortran, my dear'
             call cpu_time(start)
+            C = MATMUL(A, B)
             call cpu_time(finish)
-            print '("Time = ",f6.3," seconds.")',finish-start
+            print '("Time for matrix multiplication= ",f6.3," seconds.")',finish-start
     end select
     
     

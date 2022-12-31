@@ -1,4 +1,4 @@
-module MatMul
+module ownMatMul
     contains
     subroutine multiply(n, A, B, C)
         implicit none
@@ -21,5 +21,5 @@ module MatMul
       end subroutine
 
    
-end module MatMul
+end module ownMatMul
  
