@@ -1,8 +1,9 @@
 program matrixmultiplication
     use construct
+    use MatMul
     implicit none
     integer :: dim, method
-    real, dimension(:, :), allocatable :: A, B
+    real, dimension(:, :), allocatable :: A, B, C
 
     !User input
     print*, 'Please enter the dimensionality of your square matrices'
@@ -14,6 +15,7 @@ program matrixmultiplication
     !allocate and fill matrices
     allocate(A(dim, dim))
     allocate(B(dim, dim))
+    allocate(C(dim, dim))
     call fill(dim, A, B)
     !print*, A(1,1), B(1,1) 
     !print*, A(2,2), B(2,2) 
@@ -25,7 +27,9 @@ program matrixmultiplication
         case (1)
             print*, 'BLAS'
         case (2)
-            print*, 'own'
+            print*, 'own Method selected'
+            call multiply(dim, A, B, C)
+            print*, C(1,1)
         case (3)
             print*, 'oFortran'
         case default
@@ -33,6 +37,5 @@ program matrixmultiplication
     end select
     
 
-    
     
 end program matrixmultiplication
