@@ -11,8 +11,8 @@ module construct
 
         do i = 1, n
           do j=i, n
-            a_ij = COS((2*pi*i*j)/n)
-            b_ij = SIN((2*pi*i*j)/n)
+            a_ij = SIN((2*pi*i*j)/n)
+            b_ij = COS((2*pi*i*j)/n)
             A(i,j) = a_ij
             B(i,j) = b_ij
             !matrix is symmetric under swap of columns and lines
