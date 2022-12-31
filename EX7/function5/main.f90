@@ -30,6 +30,7 @@ program matrixmultiplication
             print*, 'own Method selected'
             call multiply(dim, A, B, C)
             print*, C(1,1)
+            print*, C(2,2)
         case (3)
             print*, 'oFortran'
         case default
