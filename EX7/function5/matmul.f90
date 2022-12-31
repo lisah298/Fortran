@@ -1,0 +1,22 @@
+module MatMul
+    contains
+    subroutine multiply(n, A, B, C)
+        implicit none
+        real :: c_ij = 0
+        integer, intent(in) :: n
+        integer :: i, j
+        real, dimension(n, n), intent(in) :: A, B
+        real, dimension(n, n), intent(out) :: C
+    
+
+        do i = 1, n
+          do j=1, n
+            c_ij = c_ij + A(i,j) * B(j,i)
+          end do
+          C(i,j)=c_ij
+        end do
+      end subroutine
+
+   
+end module MatMul
+ 
