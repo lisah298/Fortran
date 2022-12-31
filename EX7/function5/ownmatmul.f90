@@ -12,8 +12,8 @@ module ownMatMul
         do i = 1, n
           do j = 1, n
             c_ij = 0
-            do res=1,n
-              c_ij = c_ij + A(i,j) * B(j,i)
+            do res = 1, n
+              c_ij = c_ij + A(i,res) * B(res,j)
             end do
             C(i,j) = c_ij
           end do
