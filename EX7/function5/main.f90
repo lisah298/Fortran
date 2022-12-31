@@ -35,7 +35,7 @@ program matrixmultiplication
         case (1)
             print*, 'DGEMM from BLAS selected '
             call cpu_time(start)
-            call DGEMM(A,B, 'T', 'T', dim, dim, dim)
+            call DGEMM('n', 'n', dim, dim, dim, 1, A, dim, B, dim, 1, c, dim)
             call cpu_time(finish)
         case (2)
             print*, 'own Method selected'
