@@ -35,28 +35,26 @@ program matrixmultiplication
         case (1)
             print*, 'DGEMM from BLAS selected '
             call cpu_time(start)
-            call DGEMM('n', 'n', dim, dim, dim, 1, A, dim, B, dim, 1, c, dim)
+            call DGEMM('n', 'n', dim, dim, dim, 1.0, A, dim, B, dim, 1.0, C, dim)
             call cpu_time(finish)
         case (2)
             print*, 'own Method selected'
             call cpu_time(start)
             call multiply(dim, A, B, C)
-            print*, C(1, 1), C(2,2)
             call cpu_time(finish)
         case (3)
             print*, 'Oh Fortran, my dear'
             call cpu_time(start)
             C = MATMUL(A, B)
-            print*, C(1, 1), C(2,2)
             call cpu_time(finish)
     end select
   
     if ( method == 0 ) then
         print '("Time for filling the matrices = ",f6.3," seconds.")',finish_fill-start_fill
     else
-        print '("First element of computed matrix = ",f6.3, "")', A(1,1), B(1,1), C(1,1)
-        print '("Trace of computed matrix = ",f6.3, "")', tr(C, dim)
-        print '("Time for matrix multiplication = ",f6.3," seconds.")',finish-start
+        print *,"First element of computed matrix = ", C(1,1)
+        print *,"Trace of computed matrix = ", tr(C, dim)
+        print '("Time for matrix multiplication = ",f6.5," seconds.")',finish-start
     end if
 
     deallocate(A)
