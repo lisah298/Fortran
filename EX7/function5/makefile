@@ -13,7 +13,7 @@ construct.o construct.mod: construct.f90
 matmul.o matmul.mod: matmul.f90
 	$(COMPILE.f90) -o matmul.o $<
 
-main.o: main.f90 construct.mod
+main.o: main.f90 construct.mod matmul.mod
 	$(COMPILE.f90) -o main.o $<
 
 
