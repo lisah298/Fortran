@@ -50,7 +50,7 @@ program matrixmultiplication
     end select
   
     if ( method == 0 ) then
-        print '("Time for filling the matrices = ",f6.3," seconds.")',finish_fill-start_fill
+        print '("Time for filling the matrices = ",f6.5," seconds.")',finish_fill-start_fill
     else
         print *,"First element of computed matrix = ", C(1,1)
         print *,"Trace of computed matrix = ", tr(C, dim)
