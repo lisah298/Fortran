@@ -14,10 +14,10 @@ module construct
             a_ij = COS((2*pi*i*j)/n)
             b_ij = SIN((2*pi*i*j)/n)
             A(i,j) = a_ij
-            B(i,j)= b_ij
+            B(i,j) = b_ij
             !matrix is symmetric under swap of columns and lines
-            A(j,i)= a_ij
-            B(j,i)= b_ij
+            A(j,i) = a_ij
+            B(j,i) = b_ij
           end do
         end do
       end subroutine
