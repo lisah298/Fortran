@@ -2,11 +2,12 @@ program matrixmultiplication
     use construct
     use ownmatmul
     use trace
+    use evalMem
 
     implicit none
     integer :: dim, method
     real, dimension(:, :), allocatable :: A, B, C
-    real :: start, finish, start_fill, finish_fill
+    real :: start, finish, start_fill, finish_fill, memory
     
 
     !User input
@@ -57,6 +58,8 @@ program matrixmultiplication
         print '("Time for matrix multiplication = ",f6.5," seconds.")',finish-start
     end if
 
+    call system_mem_usage(memory)
+    !print*, 'memory', memory
     deallocate(A)
     deallocate(B)
     deallocate(C)
