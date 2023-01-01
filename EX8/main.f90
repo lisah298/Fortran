@@ -1,12 +1,9 @@
 program MDprogram
     use algorithms
     implicit none
+    real :: t_start, t_finish, timestep, pos, vel,  new_pos, new_vel, x_init = 1.0, v_init = 1.2, mass = 1
     integer :: method, i, steps
-    real :: t_start, t_finish
-    real :: v0 = 1.2, x0 = 1.0, dt = 1, m = 1, x = 0, v = 0
-   
-   
-    
+
     !Ask user to select algorithm
     print*, 'Which method would you like to use? 0: 1st order Euler, 1: Velocity Verlet, 2: 2nd order Euler'
     read(*,*) method
@@ -14,19 +11,12 @@ program MDprogram
     print*, 'How many time steps?'
     read(*,*) steps
 
+    print*, 'Which time step?'
+    read(*,*) timestep
 
-    call cpu_time(t_start)
-   
-
-    !switch for executing selected method
-    do i = 0, steps
-        !t = t + i*dt
-        select case (method)
+    select case (method)
         case (0)
             print*, '1st order Euler was chosen'
-            call fo_euler(dt, x0, v0, m, x, v)
-            print*, x
-            print*, v
         case (1)
             print*, 'Velocity Verlet was chosen'
         case (2)
@@ -34,10 +24,30 @@ program MDprogram
         !case (3)
         !    print*, 'Oh Fortran, my dear'
         case default
-            print*, 'default' 
-    end select    
-    
-end do
+            print*, 'default'
+    end select 
+    call cpu_time(t_start)
+   
+    pos = x_init
+    vel = v_init
+
+    !switch for executing selected method
+    do i = 0, steps
+        print*, 'pos', pos
+        print*, 'vel', vel
+        select case (method)
+            case (0)
+                call fo_euler(timestep, pos, vel, mass, new_pos, new_vel)
+            case (1)
+                call verlet(timestep, pos, vel, mass, new_pos, new_vel)
+            case (2)
+                call so_euler(timestep, pos, vel, mass, new_pos, new_vel)
+        !case (3)
+        !    print*, 'Oh Fortran, my dear'
+        end select      
+        pos = new_pos
+        vel = new_vel
+    end do
     
   
     call cpu_time(t_finish)
