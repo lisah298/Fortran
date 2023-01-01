@@ -1,4 +1,5 @@
 */*/*.mod
+*/*.mod
 */*/*.o
 */*.o
 EX7/function3/main

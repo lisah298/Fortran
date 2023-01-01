@@ -1,4 +1,5 @@
 program MDprogram
+    use algorithms
     implicit none
     integer :: method
     real :: start, finish

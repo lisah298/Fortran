@@ -2,16 +2,16 @@
 FC=gfortran
 COMPILE.f90 = $(FC) -c
 
-SOURCES=main.f90 
+SOURCES=main.f90 algorithms.f90
 
 main: $(subst .f90,.o,$(SOURCES))
 	$(FC) $(FCFLAGS) -o $@ $+
 
-#construct.o construct.mod: construct.f90
-#	$(COMPILE.f90) -o construct.o $<
+algorithms.o algorithms.mod: algorithms.f90
+	$(COMPILE.f90) -o algorithms.o $<
 
 
-main.o: main.f90 
+main.o: main.f90 algorithms.mod
 	$(COMPILE.f90) -o main.o $<
 
 
