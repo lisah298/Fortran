@@ -20,6 +20,6 @@ module potential
     real function  f_der(x)
     implicit none
     real, intent(in) :: x
-    f_der = -24*((26/x**(14))-(7/x**(8)))
+    f_der = -(12*(4*x**6-4))/x**13-24/x**7
     end function  f_der
 end module potential

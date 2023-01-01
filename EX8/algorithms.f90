@@ -22,10 +22,8 @@ module algorithms
         a = f(x0)/m
 
         x_next = x0 + v0*dt + 0.5*a*(dt**2) 
-        !print*, x_next
         a_next = f(x_next)/m
         v_next = v0 +  0.5 * (a+a_next) * dt 
-        !print*, v_next
     end subroutine
 
     subroutine so_euler(dt, x0, v0, m, x_next, v_next)
@@ -36,7 +34,7 @@ module algorithms
         a = f(x0)/m
         x_next = x0 + v0 * dt + 0.5 * a * dt**2 
         !print*, x_next
-        v_next = v0 + a * dt + 0.5 * (f_der(x0)*v0/m) * dt**2 
+        v_next = v0 + a*dt + 0.5 * ((f_der(x0)*v0)/m) * (dt**2) 
         !print*, v_next
     end subroutine
 
