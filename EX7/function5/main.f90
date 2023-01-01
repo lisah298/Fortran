@@ -7,7 +7,8 @@ program matrixmultiplication
     implicit none
     integer :: dim, method
     real, dimension(:, :), allocatable :: A, B, C
-    real :: start, finish, start_fill, finish_fill, memory
+    real :: start, finish, start_fill, finish_fill
+    character(len=5) :: memory_start, memory_end
     
 
     !User input
@@ -27,7 +28,7 @@ program matrixmultiplication
     call fill(dim, A, B)
     call cpu_time(finish_fill)
    
-    
+    call system_mem_usage(memory_start)
 
     !switch for executing selected method
     select case (method)
@@ -53,13 +54,16 @@ program matrixmultiplication
     if ( method == 0 ) then
         print '("Time for filling the matrices = ",f6.5," seconds.")',finish_fill-start_fill
     else
+        call system_mem_usage(memory_end)
         print *,"First element of computed matrix = ", C(1,1)
         print *,"Trace of computed matrix = ", tr(C, dim)
-        print '("Time for matrix multiplication = ",f6.5," seconds.")',finish-start
+        print *, "Time for matrix multiplication in seconds = ",finish-start
+        print*, 'Memory usage before multiplication = ', memory_start
+        print*, 'Memory usage after multiplication = ', memory_end
     end if
 
-    call system_mem_usage(memory)
-    !print*, 'memory', memory
+    
+    
     deallocate(A)
     deallocate(B)
     deallocate(C)

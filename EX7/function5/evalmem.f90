@@ -2,12 +2,12 @@ module evalMem
     implicit none  
 contains
 
-subroutine system_mem_usage(mem)
+subroutine system_mem_usage(mem_string)
     implicit none
-    real, intent(out) :: mem
+    !real, intent(out) :: mem
     character(len=80) :: line
     character(len=8)  :: junk
-    character(len=4) :: mem_string
+    character(len=5), intent(out) :: mem_string
   
     !This is horrible but it works
    
@@ -19,9 +19,6 @@ subroutine system_mem_usage(mem)
 
     !extract memory
     read(1, *) junk, junk, junk, junk, junk, junk, junk , mem_string
-    read( mem_string, '(f10.0)' )  mem
-    print*, 'Memory usage in Mb: ', mem/1000
-
 
     !remove file
     call execute_command_line ('rm mem.txt')
