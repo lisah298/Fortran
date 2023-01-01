@@ -9,8 +9,7 @@ subroutine system_mem_usage(mem)
     character(len=8)  :: junk
     character(len=4) :: mem_string
   
-    
-
+    !This is horrible but it works
    
     line = trim("top  -o mem -l 1 | grep 'main'  > mem.txt")
     call execute_command_line (line)
@@ -21,7 +20,7 @@ subroutine system_mem_usage(mem)
     !extract memory
     read(1, *) junk, junk, junk, junk, junk, junk, junk , mem_string
     read( mem_string, '(f10.0)' )  mem
-    print*, 'Memory usage: ', mem
+    print*, 'Memory usage in Mb: ', mem/1000
 
 
     !remove file
