@@ -19,4 +19,4 @@ main.o: main.f90 algorithms.mod potential.mod
 
 .PHONY: clean
 clean:
-	-rm -f *.o *.mod main
+	-rm -f *.o *.mod main *.txt
