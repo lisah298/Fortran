@@ -1,6 +1,7 @@
 */*/*.mod
 */*.mod
 */*/*.o
+*/*/*.gro
 */*.o
 EX7/function3/main
 .vscode
