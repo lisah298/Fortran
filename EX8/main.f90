@@ -6,7 +6,8 @@ program MDprogram
     integer :: method, i, steps
 
     !Ask user to select algorithm
-    print*, 'Which method would you like to use? 0: 1st order Euler, 1: Velocity Verlet, 2: 2nd order Euler, 3: 3rd order Euler'
+    print*, 'Which method would you like to use? 0: 1st order Euler, &
+    1: Velocity Verlet, 2: 2nd order Euler, 3: 3rd order Euler, 4: Runge-Kutta.'
     read(*,*) method
 
     select case (method)
@@ -15,9 +16,11 @@ program MDprogram
         case (1)
             print*, 'Velocity Verlet was chosen'
         case (2)
-            print*, '2nd order Euler'
+            print*, '2nd order Euler was chosen'
         case (3)
-            print*, '3rd order Euler'
+            print*, '3rd order Euler was chosen'
+        case (4)
+            print*, 'Runge-Kutta was chosen'
         case default
             print*, 'No method chosen. Program will be aborted!'
             call exit()
@@ -55,8 +58,11 @@ program MDprogram
                 call euler2(timestep, pos, vel, mass, new_pos, new_vel)
             case (3)
                call euler3(timestep, pos, vel, mass, new_pos, new_vel)
+            case (4)
+                call rungekutta(timestep, pos, vel, mass, new_pos, new_vel)
             case default
-                print*, 'Oh Fortran, my dear'
+                print*, 'Something went wrong. Program will be aborted'
+                call exit()
         end select      
         pos = new_pos
         vel = new_vel
