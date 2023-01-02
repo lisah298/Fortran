@@ -58,6 +58,7 @@ program MDprogram
     
   
     call cpu_time(t_finish)
+    print*, 'MD run completed. Output is printed in MD.log file.'
     print '("Execution time = ",f6.5," seconds.")', t_finish-t_start
    
 end program MDprogram
