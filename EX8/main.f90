@@ -1,7 +1,8 @@
 program MDprogram
     use algorithms
+    use potential
     implicit none
-    real :: t_start, t_finish, timestep, pos, vel,  new_pos, new_vel, x_init = 1.0, v_init = 1.2, mass = 1
+    real :: t_start, t_finish, timestep, pos, vel,  new_pos, new_vel, ekin, epot , etot, t = 0, x_init = 1.0, v_init = 1.2, mass = 1
     integer :: method, i, steps
 
     !Ask user to select algorithm
@@ -30,11 +31,17 @@ program MDprogram
    
     pos = x_init
     vel = v_init
-
+    open(1, file = 'MD.log',status='new')
+    write(1,*) 't   ', 'x   ', 'v'  , 'E_kin    ', 'E_pot   ', 'E_tot   '
     !switch for executing selected method
     do i = 0, steps
-        print*, 'pos', pos
-        print*, 'vel', vel
+        !print*, 'pos', pos
+        !print*, 'vel', vel
+        ekin = 0.5*mass*(vel**2)
+        epot = V(pos)
+        etot= ekin + epot
+        t = t + timestep
+        write(1,*) t, pos, vel, ekin, epot, etot
         select case (method)
             case (0)
                 call fo_euler(timestep, pos, vel, mass, new_pos, new_vel)
