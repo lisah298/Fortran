@@ -6,14 +6,8 @@ program MDprogram
     integer :: method, i, steps
 
     !Ask user to select algorithm
-    print*, 'Which method would you like to use? 0: 1st order Euler, 1: Velocity Verlet, 2: 2nd order Euler'
+    print*, 'Which method would you like to use? 0: 1st order Euler, 1: Velocity Verlet, 2: 2nd order Euler, 3: 3rd order Euler'
     read(*,*) method
-
-    print*, 'How many time steps?'
-    read(*,*) steps
-
-    print*, 'Which time step?'
-    read(*,*) timestep
 
     select case (method)
         case (0)
@@ -22,21 +16,31 @@ program MDprogram
             print*, 'Velocity Verlet was chosen'
         case (2)
             print*, '2nd order Euler'
-        !case (3)
-        !    print*, 'Oh Fortran, my dear'
+        case (3)
+            print*, '3rd order Euler'
         case default
-            print*, 'default'
+            print*, 'No method chosen. Program will be aborted!'
+            call exit()
     end select 
+    
+    print*, 'How many time steps?'
+    read(*,*) steps
+
+    print*, 'Which time step?'
+    read(*,*) timestep
+
     call cpu_time(t_start)
    
+    !initial conditions
     pos = x_init
     vel = v_init
+
+    !open file and write header line
     open(1, file = 'MD.log',status='unknown')
     write(1,*) 'step    ', 't   ', 'x   ', 'v   '  , 'E_kin    ', 'E_pot   ', 'E_tot   '
-    !switch for executing selected method
+    
+    !switch for propagating the simulation
     do i = 0, steps
-        !print*, 'pos', pos
-        !print*, 'vel', vel
         ekin = 0.5*mass*(vel**2)
         epot = V(pos)
         etot= ekin + epot
@@ -44,13 +48,15 @@ program MDprogram
         write(1,*) i, t, pos, vel, ekin, epot, etot
         select case (method)
             case (0)
-                call fo_euler(timestep, pos, vel, mass, new_pos, new_vel)
+                call euler1(timestep, pos, vel, mass, new_pos, new_vel)
             case (1)
                 call verlet(timestep, pos, vel, mass, new_pos, new_vel)
             case (2)
-                call so_euler(timestep, pos, vel, mass, new_pos, new_vel)
-        !case (3)
-        !    print*, 'Oh Fortran, my dear'
+                call euler2(timestep, pos, vel, mass, new_pos, new_vel)
+            case (3)
+               call euler3(timestep, pos, vel, mass, new_pos, new_vel)
+            case default
+                print*, 'Oh Fortran, my dear'
         end select      
         pos = new_pos
         vel = new_vel
