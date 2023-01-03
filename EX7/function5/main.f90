@@ -10,7 +10,6 @@ program matrixmultiplication
     real :: start, finish, start_fill, finish_fill
     character(len=5) :: memory_start, memory_end
     
-
     !User input
     print*, 'Please enter the dimensionality of your square matrices'
     read(*,*) dim
@@ -19,11 +18,12 @@ program matrixmultiplication
     print*, 'Which method would you like to use? 0: Dummy, 1: BLAS, 2: own, 3: intrinsic'
     read(*,*) method
 
-    !allocate and fill matrices
+    !allocate matrices
     allocate(A(dim, dim))
     allocate(B(dim, dim))
     allocate(C(dim, dim))
 
+    !fille matrices and measure time
     call cpu_time(start_fill)
     call fill(dim, A, B)
     call cpu_time(finish_fill)
