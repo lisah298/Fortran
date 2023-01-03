@@ -62,8 +62,6 @@ program matrixmultiplication
         print*, 'Memory usage after multiplication = ', memory_end
     end if
 
-    
-    
     deallocate(A)
     deallocate(B)
     deallocate(C)
