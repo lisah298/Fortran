@@ -8,9 +8,8 @@ module construct
         integer :: i, j
         real, dimension(n, n), intent(out) :: A, B
     
-
         do i = 1, n
-          do j=i, n
+          do j = i, n
             a_ij = SIN((2*pi*i*j)/n)
             b_ij = COS((2*pi*i*j)/n)
             A(i,j) = a_ij
@@ -22,6 +21,5 @@ module construct
         end do
       end subroutine
 
-   
 end module construct
  

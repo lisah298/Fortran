@@ -1,4 +1,7 @@
 */*/*.mod
+*/*/*.out
+*/*/*.log
+*/*/*.pdf
 */*.mod
 */*/*.o
 */*/*.gro
@@ -12,3 +15,6 @@ EX8/MDprogram/main
 */*/*.log
 EX8/diffusion/main
 */*/MSD_*.out
+EX7/function5/quadratic
+EX7/function5/cubic
+EX7/function5/construct.f90
