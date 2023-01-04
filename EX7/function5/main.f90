@@ -23,7 +23,7 @@ program matrixmultiplication
     allocate(B(dim, dim))
     allocate(C(dim, dim))
 
-    !fille matrices and measure time
+    !fill matrices and measure time
     call cpu_time(start_fill)
     call fill(dim, A, B)
     call cpu_time(finish_fill)
@@ -52,7 +52,7 @@ program matrixmultiplication
     end select
   
     if ( method == 0 ) then
-        print '("Time for filling the matrices = ",f6.5," seconds.")',finish_fill-start_fill
+        print*, 'Time for filling the matrices  in seconds = ',finish_fill-start_fill
     else
         call system_mem_usage(memory_end)
         print *,"First element of computed matrix = ", C(1,1)
