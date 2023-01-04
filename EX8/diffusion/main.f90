@@ -14,7 +14,7 @@ program MDprogram
     !let user enter file name
     print*, 'Please enter the name of your .gro file containing the trajectory.'
     !read(*,*) filename
-    filename = 'spc_full.gro'
+    filename = 'spc_full_no_pbc.gro'
     print*, 'How many water molecules does your system contain?'
     !read(*,*) molecules
     molecules = 221
@@ -37,6 +37,7 @@ program MDprogram
 
     open (2, file = filename, status = 'old')
     open (3, file = 'MSD.out', status = 'unknown')
+    write(3,*) 'step', 'time', 'msd'
    
     call cpu_time(t_start)
    
@@ -83,11 +84,11 @@ program MDprogram
            !sum_msd = sum_msd + msd
         end do
         msd = (msd/(sites*molecules))
-        sum_msd = sum_msd + msd
-        write(3,*) abs_step, time, msd, sum_msd
+        !sum_msd = sum_msd + msd
+        write(3,*) abs_step, time, msd
     end do
     
-    print*
+    !print*
     read(time,*)  t
     read(time0,*)  t0
     dt = (t - t0)/steps
