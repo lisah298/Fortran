@@ -8,7 +8,7 @@ module ownMatMul
         real, dimension(n, n), intent(in) :: A, B
         real, dimension(n, n), intent(out) :: C
 
-       
+       !compute matrix element c_ij
         do i = 1, n
           do j = 1, n
             c_ij = 0
@@ -20,6 +20,5 @@ module ownMatMul
         end do
       end subroutine
 
-   
 end module ownMatMul
  
