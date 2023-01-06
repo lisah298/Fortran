@@ -27,6 +27,8 @@ module greenkubo
     step_e = INT(te/dt)+1
     steps = step_e - step_a
 
+    open (3, file = 'v_autokorr.out', status = 'unknown')
+    write(3,*) 'step    ', 'Time [ps]    ', 'v(0)*v(t) [nm^2/ps^2]'
 
     do k = 1, step_a
         do mol = 1, molecules
@@ -59,7 +61,7 @@ module greenkubo
         end do
         v_square = (v_square/(sites*molecules))
         sum_vsquare = sum_vsquare + v_square
-       
+        write(3,*) abs_step, time, v_square/3
         !skip lines with number of molecules and time stats
         read(2,*)
         read(2,*) junk, junk, junk, time, junk, abs_step
@@ -70,7 +72,7 @@ module greenkubo
     t = te - ta
     !msd_av = (sum_vsquare)/steps
     v_square_av = (sum_vsquare)/steps
-    D = ((sum_vsquare*dt)/(3*10**2))
+    D = ((sum_vsquare*dt)/(3))
     print*, 'D =', D
 
   
