@@ -1,10 +1,10 @@
 program diffusion
     use einstein
     implicit none
-    real :: t_start, t_finish,  D
+    real :: t_start, t_finish,  D, ta, te, dt
     integer :: method
     character(20):: filename
-    integer :: molecules, sites, steps
+    integer :: molecules, sites
     real, allocatable :: r0(:,:,:), v0(:,:,:), r(:,:,:), v(:,:,:)
     !real, allocatable :: MSD(:)
 
@@ -22,10 +22,17 @@ program diffusion
     sites = 3
 
     !ask user about size of file
-    print*, 'How many steps does your trajectory have?'
+    !print*, 'What is the timestep of your trajectory?'
     !read(*,*) steps
-    steps = 50000
-  
+    !steps = 50000
+
+    print*, 'How many steps does your trajectory have?'
+    !read(*,*) dt
+    dt = 0.002
+
+    print*, 'Pleas enter start and end time for computation as ta te'
+    read(*,*) ta, te
+
 
     print*, 'Which method do you want to use for computing the diffusion coefficient? 1: Einstein, 2: Green-Kubo'
     read(*,*) method
@@ -35,7 +42,7 @@ program diffusion
         allocate(r0(1:molecules,1:sites,1:3))
         allocate(r(1:molecules,1:sites,1:3))
         call cpu_time(t_start)
-        call diffusion_einstein(filename, steps, molecules, sites, D)
+        call diffusion_einstein(filename, molecules, sites, ta, te, dt, D)
         call cpu_time(t_finish)
         deallocate (r0)
         deallocate (r)
