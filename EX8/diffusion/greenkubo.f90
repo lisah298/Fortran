@@ -16,7 +16,7 @@ module greenkubo
     open (2, file = filename, status = 'old')
    
    
-    print*, 'Green-Kubo chosen'
+    print*, 'Green-Kubo chosen. Compuation started.'
     
     !read in initial positions    
     read(2,*) junk, junk, junk, time0, junk, abs_step
@@ -70,7 +70,7 @@ module greenkubo
     t = te - ta
     !msd_av = (sum_vsquare)/steps
     v_square_av = (sum_vsquare)/steps
-    D = ((sum_vsquare*dt*t)/3*10**2)
+    D = ((sum_vsquare)/3*10**2)
     print*, 'D =', D
 
   

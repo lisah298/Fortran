@@ -17,7 +17,7 @@ module einstein
     open (3, file = 'MSD.out', status = 'unknown')
     write(3,*) 'step    ', 'Time [ps]    ', 'msd [nm^2/ps]'
    
-    print*, 'Einstein chosen'
+    print*, 'Einstein chosen. Computation started.'
     
     !read in initial positions    
     read(2,*) junk, junk, junk, time0, junk, abs_step
