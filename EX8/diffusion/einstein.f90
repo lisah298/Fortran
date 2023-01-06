@@ -56,7 +56,6 @@ module einstein
                     
                 end do
             end do
-           !sum_msd = sum_msd + msd
         end do
         msd = (msd/(sites*molecules))
         sum_msd = sum_msd + msd
