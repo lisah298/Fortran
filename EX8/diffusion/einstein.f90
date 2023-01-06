@@ -48,7 +48,7 @@ module einstein
             !iterate over atoms/sites ins molecule
             do atom = 1, sites
                 read(2,*)  SOL, site, index, r(mol, atom, 1), r(mol, atom, 2)&
-                , r(mol, atom, 3)
+                , r(mol, atom, 3), junk, junk, junk
                 
                 !iterate over coordinates for computing the msd
                 do i = 1, 3
