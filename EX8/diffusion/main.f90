@@ -46,7 +46,9 @@ program diffusion
     case (2)
         allocate(v0(1:molecules,1:sites,1:3))
         allocate(v(1:molecules,1:sites,1:3))
+        call cpu_time(t_start)
         call diffusion_greenkubo(filename, molecules, sites, ta, te, dt, D)
+        call cpu_time(t_finish)
         deallocate (v0)
         deallocate (v)
     end select

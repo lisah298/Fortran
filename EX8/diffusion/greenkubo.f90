@@ -70,7 +70,7 @@ module greenkubo
     t = te - ta
     !msd_av = (sum_vsquare)/steps
     v_square_av = (sum_vsquare)/steps
-    D = ((sum_vsquare)/3*10**2)
+    D = ((2*sum_vsquare*dt*t)/(3*10**2))
     print*, 'D =', D
 
   
