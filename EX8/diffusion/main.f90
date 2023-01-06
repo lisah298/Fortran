@@ -1,5 +1,6 @@
 program diffusion
     use einstein
+    use greenkubo
     implicit none
     real :: t_start, t_finish,  D, ta, te, dt
     integer :: method
@@ -22,11 +23,7 @@ program diffusion
     sites = 3
 
     !ask user about size of file
-    !print*, 'What is the timestep of your trajectory?'
-    !read(*,*) steps
-    !steps = 50000
-
-    print*, 'How many steps does your trajectory have?'
+    print*, 'What is the timestep of your trajectory?'
     !read(*,*) dt
     dt = 0.002
 
@@ -49,7 +46,7 @@ program diffusion
     case (2)
         allocate(v0(1:molecules,1:sites,1:3))
         allocate(v(1:molecules,1:sites,1:3))
-        !call verlet(timestep, pos, vel, mass, new_pos, new_vel)
+        call diffusion_greenkubo(filename, molecules, sites, ta, te, dt, D)
         deallocate (v0)
         deallocate (v)
     end select
