@@ -10,7 +10,7 @@ module greenkubo
         character(12) :: junk, abs_step, time, time0
         real, intent(out) :: D
         real :: v0(1:molecules,1:sites,1:3), v(1:molecules,1:sites,1:3)
-        real :: v_square, sum_vsquare, t, v_square_av
+        real :: v_square, sum_vsquare, t, v_square_av, v0_square
         integer :: step, mol, atom, i, k, step_a, step_e,steps
         
     open (2, file = filename, status = 'old')
@@ -45,6 +45,7 @@ module greenkubo
     sum_vsquare = 0
     do step = 1, step_e-step_a
         v_square = 0
+        !v0_square = 0
         !iterate through molecules of a single step
         do mol = 1, molecules
             !iterate over atoms/sites ins molecule
@@ -54,14 +55,15 @@ module greenkubo
                 
                 !iterate over coordinates for computing the msd
                 do i = 1, 3
-                    v_square = v_square + ((v(mol, atom, i)*v0(mol, atom, i)))
+                    v_square = v_square + ((v(mol, atom, i)*v0(mol, atom, i)))/((v0(mol, atom, i)*v0(mol, atom, i)))
+                    !v0_square = v0_square + ((v0(mol, atom, i)*v0(mol, atom, i)))
                 end do
             end do
            !sum_msd = sum_msd + msd
         end do
         v_square = (v_square/(sites*molecules))
         sum_vsquare = sum_vsquare + v_square
-        write(3,*) abs_step, time, v_square/3
+        write(3,*) abs_step, time, v_square
         !skip lines with number of molecules and time stats
         read(2,*)
         read(2,*) junk, junk, junk, time, junk, abs_step
@@ -71,9 +73,9 @@ module greenkubo
     !compute D
     t = te - ta
     !msd_av = (sum_vsquare)/steps
-    v_square_av = (sum_vsquare)/steps
-    D = ((sum_vsquare*dt)/(3))
-    print*, 'D =', D
+    v_square_av = (sum_vsquare)
+    D = ((v_square_av*dt)/(3*t*100))
+    print*, 'D [cm^2/s] =', D
 
   
     
