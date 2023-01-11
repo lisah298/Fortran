@@ -9,22 +9,6 @@ program MDprogram
     print*, 'Which method would you like to use? 0: 1st order Euler, &
     1: Velocity Verlet, 2: 2nd order Euler, 3: 3rd order Euler, 4: Runge-Kutta.'
     read(*,*) method
-
-    select case (method)
-        case (0)
-            print*, '1st order Euler was chosen'
-        case (1)
-            print*, 'Velocity Verlet was chosen'
-        case (2)
-            print*, '2nd order Euler was chosen'
-        case (3)
-            print*, '3rd order Euler was chosen'
-        case (4)
-            print*, 'Runge-Kutta was chosen'
-        case default
-            print*, 'No method chosen. Program will be aborted!'
-            call exit()
-    end select 
     
     print*, 'How many time steps?'
     read(*,*) steps
@@ -42,13 +26,13 @@ program MDprogram
     open(1, file = 'MD.log',status='unknown')
     write(1,*) 'step    ', 't   ', 'x   ', 'v   '  , 'E_kin    ', 'E_pot   ', 'E_tot   '
     
-    !switch for propagating the simulation
+    !switch in for loop to propagate the simulation
     do i = 0, steps
         ekin = 0.5*mass*(vel**2)
         epot = V(pos)
-        etot= ekin + epot
-        t = t + timestep
+        etot = ekin + epot
         write(1,*) i, t, pos, vel, ekin, epot, etot
+        t = t + timestep
         select case (method)
             case (0)
                 call euler1(timestep, pos, vel, mass, new_pos, new_vel)
@@ -57,7 +41,7 @@ program MDprogram
             case (2)
                 call euler2(timestep, pos, vel, mass, new_pos, new_vel)
             case (3)
-               call euler3(timestep, pos, vel, mass, new_pos, new_vel)
+                call euler3(timestep, pos, vel, mass, new_pos, new_vel)
             case (4)
                 call rungekutta(timestep, pos, vel, mass, new_pos, new_vel)
             case default
@@ -68,7 +52,6 @@ program MDprogram
         vel = new_vel
     end do
     
-  
     call cpu_time(t_finish)
     print*, 'MD run completed. Output is printed in MD.log file.'
     print '("Execution time = ",f6.5," seconds.")', t_finish-t_start

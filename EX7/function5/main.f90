@@ -50,7 +50,7 @@ program matrixmultiplication
             C = MATMUL(A, B)
             call cpu_time(finish)
     end select
-  
+    
     if ( method == 0 ) then
         print*, 'Time for filling the matrices  in seconds = ',finish_fill-start_fill
     else
