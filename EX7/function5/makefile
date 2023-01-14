@@ -1,6 +1,6 @@
 .SUFFIXES:
 FC=gfortran
-COMPILE.f90 = $(FC) -c
+COMPILE.f90 = $(FC) -c -g
 FCFLAGS=-lblas
 
 SOURCES=main.f90 construct.f90 ownmatmul.f90 trace.f90 evalmem.f90

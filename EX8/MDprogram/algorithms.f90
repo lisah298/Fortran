@@ -37,9 +37,10 @@ module algorithms
         implicit none
         real, intent(in) :: dt, x0, v0, m
         real, intent(out) :: x_next, v_next
-        real :: a
+        real :: a, da
         a = f(x0)/m
-        x_next = x0 + v0 * dt + 0.5 * a * dt**2 
+        da = f_der(x0)/m
+        x_next = x0 + v0 * dt + 0.5 * a * dt**2 + (1.0/6.0)* da * (dt**3)
         v_next = v0 + a*dt + 0.5 * ((f_der(x0)*v0)/m) * (dt**2) + (1/(6*m))*(f_der2(x0)*(v0**2)+ f_der(x0)*a) * (dt**3) 
     end subroutine
 
