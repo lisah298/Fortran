@@ -24,7 +24,7 @@ program MDprogram
 
     !open file and write header line
     open(1, file = 'MD.log',status='unknown')
-    write(1,*) 'step    ', 't   ', 'x   ', 'v   '  , 'E_kin    ', 'E_pot   ', 'E_tot   '
+    write(1,*) '#step    ', 't   ', 'x   ', 'v   '  , 'E_kin    ', 'E_pot   ', 'E_tot   '
     
     !switch in for loop to propagate the simulation
     do i = 0, steps
