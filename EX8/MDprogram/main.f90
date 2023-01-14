@@ -7,7 +7,7 @@ program MDprogram
 
     !Ask user to select algorithm
     print*, 'Which method would you like to use? 0: 1st order Euler, &
-    1: Velocity Verlet, 2: 2nd order Euler, 3: 3rd order Euler, 4: Runge-Kutta.'
+    1: Velocity Verlet, 2: 2nd order Euler, 3: 3rd order Euler.'
     read(*,*) method
     
     print*, 'How many time steps?'
@@ -42,8 +42,6 @@ program MDprogram
                 call euler2(timestep, pos, vel, mass, new_pos, new_vel)
             case (3)
                 call euler3(timestep, pos, vel, mass, new_pos, new_vel)
-            case (4)
-                call rungekutta(timestep, pos, vel, mass, new_pos, new_vel)
             case default
                 print*, 'Something went wrong. Program will be aborted'
                 call exit()
