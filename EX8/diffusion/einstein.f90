@@ -32,20 +32,17 @@ module einstein
     allocate(pos(1:3, 1:sites*molecules, 1:steps))
     !allocate(MSD(1:3))
 
-    do step = 1,  steps-1
+    do step = 1,  steps+1
         read(2,*) junk, junk, junk, time, junk, abs_step
         read(2,*)
-        !print*, step
         do atom = 1, sites*molecules
                 read(2,*)  SOL, site, index, pos(1:3, atom, step), junk, junk, junk
                 write(4, *) abs_step, atom, pos(1 ,atom, step), pos(2,atom, step), pos(3, atom, step)
         end do
         read(2,*)
-        
-   
     end do
   
-    Nts = steps
+    Nts = steps+1
     do dt_i = 1, Nts
         !print*, dt_i
         N = Nts - dt_i
