@@ -6,7 +6,7 @@ program matrixmultiplication
 
     implicit none
     integer :: dim, method
-    real, dimension(:, :), allocatable :: A, B, C
+    real(kind=8), dimension(:, :), allocatable :: A, B, C
     real :: start, finish, start_fill, finish_fill
     character(len=5) :: memory_start, memory_end
     
@@ -35,7 +35,7 @@ program matrixmultiplication
         case (0)
             print*, 'Dummy method, no multiplication'
         case (1)
-            print*, 'DGEMM from BLAS selected '
+            print*, 'SGEMM from BLAS selected '
             call cpu_time(start)
             call DGEMM('n', 'n', dim, dim, dim, 1.0, A, dim, B, dim, 1.0, C, dim)
             call cpu_time(finish)

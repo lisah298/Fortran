@@ -2,11 +2,11 @@ module ownMatMul
     contains
     subroutine multiply(n, A, B, C)
         implicit none
-        real :: c_ij 
+        real(kind=8) :: c_ij 
         integer, intent(in) :: n
         integer :: i, j, res
-        real, dimension(n, n), intent(in) :: A, B
-        real, dimension(n, n), intent(out) :: C
+        real(kind=8), dimension(n, n), intent(in) :: A, B
+        real(kind=8), dimension(n, n), intent(out) :: C
 
        !compute matrix element c_ij
         do i = 1, n

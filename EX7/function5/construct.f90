@@ -6,7 +6,7 @@ module construct
         real :: a_ij, b_ij
         integer, intent(in) :: n
         integer :: i, j
-        real, dimension(n, n), intent(out) :: A, B
+        real(kind=8), dimension(n, n), intent(out) :: A, B
     
         do i = 1, n
           do j = i, n

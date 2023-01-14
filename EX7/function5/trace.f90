@@ -1,11 +1,11 @@
 module trace
     implicit none
     contains
-    real function  tr(M, dim)
+    real(kind=8) function  tr(M, dim)
     integer, intent(in) :: dim
     integer :: i
-    real :: result = 0
-    real, dimension(dim, dim), intent(in) :: M
+    real(kind=8) :: result = 0
+    real(kind=8), dimension(dim, dim), intent(in) :: M
  
     do i=1, dim
         result = result + M(i,i)
