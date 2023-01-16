@@ -17,17 +17,16 @@ program diffusion
     print*, 'How many sites/atoms does the molecules of your system contain?'
     sites = 3
 
-    !ask user about size of file
     print*, 'What is the timestep of your trajectory?'
     read(*,*) dt
 
     print*, 'Pleas enter start and end time for computation as ta te'
     read(*,*) ta, te
 
-
     print*, 'Which method do you want to use for computing the diffusion coefficient? 1: Einstein, 2: Green-Kubo'
     read(*,*) method
     
+    !start computation
     call cpu_time(t_start)
     select case (method)
     case (1)
