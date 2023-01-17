@@ -2,7 +2,7 @@ program diffusion
     use einstein
     use greenkubo
     implicit none
-    real :: t_start, t_finish,  D, ta, te, dt
+    real :: t_start, t_finish,  D, dt, t
     integer :: method
     character(20):: filename
     integer :: molecules, sites
@@ -12,16 +12,16 @@ program diffusion
     read(*,*) filename
    
     print*, 'How many water molecules does your system contain?'
-    molecules = 221
+    read(*,*) molecules 
 
     print*, 'How many sites/atoms does the molecules of your system contain?'
-    sites = 3
+    read(*,*) sites 
 
     print*, 'What is the timestep of your trajectory?'
     read(*,*) dt
 
-    print*, 'Pleas enter start and end time for computation as ta te'
-    read(*,*) ta, te
+    print*, 'What is the full time length of your trajectory in ps?'
+    read(*,*) t
 
     print*, 'Which method do you want to use for computing the diffusion coefficient? 1: Einstein, 2: Green-Kubo'
     read(*,*) method
@@ -30,9 +30,9 @@ program diffusion
     call cpu_time(t_start)
     select case (method)
     case (1)
-        call diffusion_einstein(filename, molecules, sites, ta, te, dt, D)
+        call diffusion_einstein(filename, molecules, sites, t, dt, D)
     case (2)
-        call diffusion_greenkubo(filename, molecules, sites, ta, te, dt, D)
+        call diffusion_greenkubo(filename, molecules, sites, t, dt, D)
     end select
     
     call cpu_time(t_finish)
