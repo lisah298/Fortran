@@ -13,8 +13,7 @@ module einstein
         integer :: step,  atom, dt_i,Nts,i, k, step_a, step_e, steps, N, steps_ges, counter, increment
         real, allocatable :: pos(:, :, :)
         
-
-        
+    !open files
     open (2, file = filename, status = 'old')
     open (3, file = 'MSD.out', status = 'unknown')
     open (4, file = 'pos.out', status = 'unknown')
@@ -33,9 +32,9 @@ module einstein
     step_e = INT(te/dt)+1
     steps = step_e - step_a
     steps_ges = INT(t_ges/dt)
-    print*, steps
-    allocate(pos(1:3, 1:sites*molecules, 1:steps_ges))
 
+    !read in positions
+    allocate(pos(1:3, 1:sites*molecules, 1:steps_ges))
     do step = 1,  steps_ges
         read(2,*) junk, junk, junk, time, junk, abs_step
         read(2,*)
@@ -49,10 +48,6 @@ module einstein
     print*, 'Done with reading in positions!'
 
     counter = 0
-
-    print*, 'step_a',step_a
-
-    print*, 'step_e',step_e
 
     Nts = steps_ges
     sum_D = 0
@@ -84,7 +79,6 @@ module einstein
     !compute D by averaging over all computed D's
     D=(sum_D/(counter))*(10**(-2.0))
     print*, 'D in cm^2/s=', D
-    
     end subroutine
 
 end module einstein
