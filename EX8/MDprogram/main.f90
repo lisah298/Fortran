@@ -2,25 +2,26 @@ program MDprogram
     use algorithms
     use potential
     implicit none
-    real :: t_start, t_finish, timestep, pos, vel,  new_pos, new_vel, ekin, epot , etot, t = 0, x_init = 1.2, v_init = 1.0, mass = 1
+    real :: t_start, t_finish, timestep, pos, vel,  new_pos, new_vel, ekin, epot , etot, t_max
+    real :: t = 0 , x_init = 1.2, v_init = 1.0, mass = 1.0
     integer :: method, i, steps
 
     !Ask user to select algorithm
-    print*, 'Which method would you like to use? 0: 1st order Euler, &
-    1: Velocity Verlet, 2: 2nd order Euler, 3: 3rd order Euler.'
+    print*, 'Which method would you like to use? 0: 1st order Euler, 1: Velocity Verlet, 2: 2nd order Euler, 3: 3rd order Euler.'
     read(*,*) method
     
-    print*, 'How many time steps?'
-    read(*,*) steps
+    print*, 'How long do you want to run your simulation??'
+    read(*,*) t_max
 
     print*, 'Which time step?'
     read(*,*) timestep
 
     call cpu_time(t_start)
-   
+  
     !initial conditions
     pos = x_init
     vel = v_init
+    steps = INT(t_max/timestep)
 
     !open file and write header line
     open(1, file = 'MD.log',status='unknown')
