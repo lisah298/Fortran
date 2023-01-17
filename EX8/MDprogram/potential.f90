@@ -13,7 +13,7 @@ module potential
     real function  f(x)
     implicit none
     real, intent(in) :: x
-    f = -4*((-12/x**(13))-(-6/x**(7)))
+    f = (48* (x**(-13.0))-(24*(x**(-7.0))))
     end function  f
 
     !first derivative of force
