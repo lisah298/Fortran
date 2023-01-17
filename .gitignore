@@ -1,6 +1,7 @@
 */*/*.mod
 */*/output/*
 */*/*.out
+*/*.out
 */*/*.txt
 */*/*.fit
 */*/*.log
@@ -23,3 +24,5 @@ EX8/diffusion/main
 EX7/function5/quadratic
 EX7/function5/cubic
 EX7/function5/construct2.f90
+EX8/diffusion/MSD.out
+EX8/diffusion/MSD.out

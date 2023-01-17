@@ -1,38 +1,42 @@
 module einstein
     implicit none
     contains
-    subroutine diffusion_einstein(filename, molecules, sites, ta, te, dt, D)
+    subroutine diffusion_einstein(filename, molecules, sites, t_ges,  dt, D)
         implicit none
-        real, intent(in) :: ta, te, dt
+        real, intent(in) ::  dt, t_ges
         integer, intent(in):: molecules, sites
         character(20), intent(in):: filename
         character(6) :: SOL, site, index
         character(12) :: junk, abs_step, time
         real, intent(out) :: D
-        real :: msd, t
-        integer :: step,  atom, dt_i,Nts,i, k, step_a, step_e, steps, N
+        real :: ta, te, msd, sum_D, t
+        integer :: step,  atom, dt_i,Nts,i, k, step_a, step_e, steps, N, steps_ges, counter, increment
         real, allocatable :: pos(:, :, :)
-        !real, allocatable :: MSDs(:)
         
 
         
     open (2, file = filename, status = 'old')
     open (3, file = 'MSD.out', status = 'unknown')
     open (4, file = 'pos.out', status = 'unknown')
-    write(3,*) '#dt   ', 'msd [nm^2/ps]'
+    write(3,*) '#dt   t[ps]   msd [nm^2/ps]   D    sum_D'
    
-    print*, 'Einstein chosen. Computation started.'
-    
-   
+    print*, 'Einstein chosen.'
+    print*, 'Please enter start and end time for computation!'
+    read(*,*) ta, te
+
+    print*, 'Please enter an increment to speed up the computation!'
+    read(*,*) increment
+
+    print*, 'Computation started.'
     
     step_a = INT(ta/dt)
     step_e = INT(te/dt)+1
     steps = step_e - step_a
+    steps_ges = INT(t_ges/dt)
     print*, steps
-    allocate(pos(1:3, 1:sites*molecules, 1:steps))
-    !allocate(MSD(1:3))
+    allocate(pos(1:3, 1:sites*molecules, 1:steps_ges))
 
-    do step = 1,  steps+1
+    do step = 1,  steps_ges
         read(2,*) junk, junk, junk, time, junk, abs_step
         read(2,*)
         do atom = 1, sites*molecules
@@ -41,12 +45,21 @@ module einstein
         end do
         read(2,*)
     end do
-  
-    Nts = steps+1
-    do dt_i = 1, Nts
-        !print*, dt_i
+
+    print*, 'Done with reading in positions!'
+
+    counter = 0
+
+    print*, 'step_a',step_a
+
+    print*, 'step_e',step_e
+
+    Nts = steps_ges
+    sum_D = 0
+    do dt_i = 1, steps_ges, increment
         N = Nts - dt_i
         msd = 0
+        D = 0
         !iterate over all possible combinations for dt=dt_i
         do k = 1 , Nts - dt_i
             !iterate over all atoms for one dt
@@ -59,16 +72,18 @@ module einstein
         msd = msd/(sites*molecules)
         msd = msd /(Nts - dt_i)
         t = dt_i * dt
-        write(3,*) dt_i, t, msd 
+        D = msd/(6.0*t)
+        if ( dt_i >= step_a .and. dt_i < step_e ) then
+            sum_D = sum_D + D
+            counter = counter + 1
+        end if
+        write(3,*) dt_i, t, msd, D, sum_D
     end do
    
-    !compute D
-    !t = te - ta
-    !msd_av = (sum_msd)/steps
-    !D = sum_msd/(6*t)
-    !print*, 'D =', D
-    D=3
-  
+    print*, counter
+    !compute D by averaging over all computed D's
+    D=(sum_D/(counter))*(10**(-2.0))
+    print*, 'D in cm^2/s=', D
     
     end subroutine
 
