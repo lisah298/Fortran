@@ -14,14 +14,14 @@ program diffusion
     print*, 'How many water molecules does your system contain?'
     read(*,*) molecules 
 
-    print*, 'How many sites/atoms does the molecules of your system contain?'
+    print*, 'How many sites/atoms does each molecule of your system contain?'
     read(*,*) sites 
-
-    print*, 'What is the timestep of your trajectory?'
-    read(*,*) dt
 
     print*, 'What is the full time length of your trajectory in ps?'
     read(*,*) t
+
+    print*, 'What is the timestep of your trajectory in ps?'
+    read(*,*) dt
 
     print*, 'Which method do you want to use for computing the diffusion coefficient? 1: Einstein, 2: Green-Kubo'
     read(*,*) method

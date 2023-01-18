@@ -75,7 +75,6 @@ module einstein
         write(3,*) dt_i, t, msd, D, sum_D
     end do
    
-    print*, counter
     !compute D by averaging over all computed D's
     D=(sum_D/(counter))*(10**(-2.0))
     print*, 'D in cm^2/s=', D
