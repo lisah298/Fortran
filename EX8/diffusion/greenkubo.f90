@@ -12,9 +12,6 @@ module greenkubo
         real :: v_square, riemann_sum, t
         integer :: step,  atom, dt_i,Nts, i, k, steps, N
         real, allocatable :: vel(:, :, :)
-        
-    
-   
    
     print*, 'Green-Kubo chosen. Computation started.'
 
@@ -25,7 +22,6 @@ module greenkubo
    
     !compute total number of steps
     steps = INT(t_ges/dt)
-    print*, steps
     allocate(vel(1:3, 1:sites*molecules, 1:steps))
    
     !read in velocities and write into vel.out file
@@ -38,7 +34,9 @@ module greenkubo
         end do
         read(2,*)
     end do
-  
+    print*, 'Done with reading in velocities.'
+
+    !Start computation of velocity autocorrelation function and integral
     riemann_sum = 0
     Nts = steps+1
     do dt_i = 1, Nts

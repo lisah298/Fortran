@@ -20,9 +20,10 @@ EX7/function4/interpol
 EX8/MDprogram/main
 */*/*.log
 EX8/diffusion/main
-*/*/MSD_*.out
+*/*/MSD*.out
+*/*/MSD.out
 EX7/function5/quadratic
 EX7/function5/cubic
 EX7/function5/construct2.f90
-EX8/diffusion/MSD.out
-EX8/diffusion/MSD.out
+
+
