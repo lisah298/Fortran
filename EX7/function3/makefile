@@ -13,7 +13,6 @@ func.o func.mod: func.f90
 main.o: main.f90 func.mod
 	$(COMPILE.f90) -o main.o $<
 
-
 .PHONY: clean
 clean:
 	-rm -f *.o *.mod main
