@@ -29,7 +29,6 @@ program vector
     len_vec2 = SQRT(square_vec2)
     angle = ACOS(dot_prod/(len_vec1*len_vec2))
 
-    
     !Print results to console
     print*, 'The angle between your two vectors in radians is', angle
     print*, 'The angle between your two vectors in degrees is', angle*180/3.14159265359

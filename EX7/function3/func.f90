@@ -8,7 +8,6 @@ module func
     !exemplary function
     yourfunc = COS(x)
     end function  yourfunc
-
-
+    
 end module  func
  
