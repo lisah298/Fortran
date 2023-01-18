@@ -9,7 +9,6 @@ program interpolation
     !let user enter file name
     print*, 'Please enter the name of your file.'
     read(*,*) filename
-    
 
     !ask user about size of file
     print*, 'Do you know how much lines your file contains? Enter y for yes and n for no.'
